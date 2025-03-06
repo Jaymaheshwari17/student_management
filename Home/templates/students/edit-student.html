@@ -8,7 +8,7 @@
                      <div class="col">
                         <h3 class="page-title">Edit Students</h3>
                         <ul class="breadcrumb">
-                           <li class="breadcrumb-item"><a href="students.html">Students</a></li>
+                           <li class="breadcrumb-item"><a href="{% url 'student_list' %}">Students</a></li>
                            <li class="breadcrumb-item active">Edit Students</li>
                         </ul>
                      </div>
@@ -18,7 +18,8 @@
                   <div class="col-sm-12">
                      <div class="card">
                         <div class="card-body">
-                           <form>
+                           <form method="post" enctype="multipart/form-data">
+                              {% csrf_token %}
                               <div class="row">
                                  <div class="col-12">
                                     <h5 class="form-title"><span>Student Information</span></h5>
@@ -26,29 +27,28 @@
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>First Name</label>
-                                       <input type="text" class="form-control" value="Nathan Humphries">
+                                       <input type="text" class="form-control" name="first_name" value="{{student.first_name}}">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Last Name</label>
-                                       <input type="text" class="form-control" value="Stephen Marley">
+                                       <input type="text" class="form-control" name="last_name" value="{{student.last_name}}">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Student Id</label>
-                                       <input type="text" class="form-control" value="PRE1234">
+                                       <input type="text" class="form-control" name="student_id" value="{{student.student_id}}">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Gender</label>
-                                       <select class="form-control">
-                                          <option>Female</option>
-                                          <option>Select Gender</option>
-                                          <option>Male</option>
-                                          <option>Others</option>
+                                       <select class="form-control" name="gender">
+                                          <option value="Female" {% if student.gender == 'Female' %}selected{% endif %}>Female</option>
+                                          <option value="Male" {% if student.gender == 'Male' %}selected{% endif %}>Male</option>
+                                          <option value="other" {% if student.gender == 'other' %}selected{% endif %}>other</option>
                                        </select>
                                     </div>
                                  </div>
@@ -56,52 +56,53 @@
                                     <div class="form-group">
                                        <label>Date of Birth</label>
                                        <div>
-                                          <input type="text" class="form-control" value="26 Apr 1994">
+                                          <input type="date" class="form-control" value="{{student.date_of_birth}}" name="date_of_birth">
                                        </div>
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Class</label>
-                                       <input type="text" class="form-control" value="10">
+                                       <input type="text" class="form-control" value="{{student.student_class}}" name="student_class">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Religion</label>
-                                       <input type="text" class="form-control" value="Religion">
+                                       <input type="text" class="form-control" value="{{student.religion}}" name="religion">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Joining Date</label>
                                        <div>
-                                          <input type="text" class="form-control" value="4 Jan 2002">
+                                          <input type="date" class="form-control" value="{{student.joining_date}}" name="joining_date">
                                        </div>
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Mobile Number</label>
-                                       <input type="text" class="form-control" value="077 3499 9959">
+                                       <input type="text" class="form-control" value="{{student.mobile_number}}" name="mobile_number">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Admission Number</label>
-                                       <input type="text" class="form-control" value="PRE1252">
+                                       <input type="text" class="form-control" value="{{student.admission_number}}" name="admission_number">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Section</label>
-                                       <input type="text" class="form-control" value="B">
+                                       <input type="text" class="form-control" value="{{student.section}}" name="section">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Student Image</label>
-                                       <input type="file" class="form-control">
+                                       <input type="file" class="form-control" name="student_image">
+                                       <img src="{{student.student_image.url}}" alt="">
                                     </div>
                                  </div>
                                  <div class="col-12">
@@ -110,65 +111,65 @@
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Father's Name</label>
-                                       <input type="text" class="form-control" value="Stephen Marley">
+                                       <input type="text" class="form-control" value="{{parent.father_name}}" name="father_name">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Father's Occupation</label>
-                                       <input type="text" class="form-control" value="Technician">
+                                       <input type="text" class="form-control" value="{{parent.father_occupation}}" name="father_occupation">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Father's Mobile</label>
-                                       <input type="text" class="form-control" value="	402 221 7523">
+                                       <input type="text" class="form-control" value="{{parent.father_mobile}}" name="father_mobile">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Father's Email</label>
-                                       <input type="email" class="form-control" value="stephenmarley@gmail.com">
+                                       <input type="email" class="form-control" value="{{parent.father_email}}" name="father_email">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Mother's Name</label>
-                                       <input type="text" class="form-control" value="Cleary Wong">
+                                       <input type="text" class="form-control" value="{{parent.mother_name}}" name="mother_name">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Mother's Occupation</label>
-                                       <input type="text" class="form-control" value="Home Maker">
+                                       <input type="text" class="form-control" value="{{parent.mother_occupation}}" name="mother_occupation">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Mother's Mobile</label>
-                                       <input type="text" class="form-control" value="026 7318 4366">
+                                       <input type="text" class="form-control" value="{{parent.mother_mobile}}" name="mother_mobile">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Mother's Email</label>
-                                       <input type="email" class="form-control" value="clearywong@gmail.com">
+                                       <input type="email" class="form-control" value="{{parent.mother_email}}" name="mother_email">
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Present Address</label>
-                                       <textarea class="form-control">86 Lamphey Road, Thelnetham</textarea>
+                                       <textarea class="form-control" name="present_address">{{parent.present_address}}</textarea>
                                     </div>
                                  </div>
                                  <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                        <label>Permanent Address</label>
-                                       <textarea class="form-control">86 Lamphey Road, Thelnetham</textarea>
+                                       <textarea class="form-control" name="permanent_address">{{parent.permanent_address}}</textarea>
                                     </div>
                                  </div>
                                  <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
                                  </div>
                               </div>
                            </form>

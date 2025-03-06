@@ -5,7 +5,7 @@
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-      <title>Preskool - Dashboard</title>
+      <title>School Management- Dashboard</title>
       <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap">
       <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
@@ -117,8 +117,8 @@
                            <img src="{% static 'assets/img/profiles/avatar-01.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
                         </div>
                         <div class="user-text">
-                           <h6>Ryan Taylor</h6>
-                           <p class="text-muted mb-0">Administrator</p>
+                           <h6>{{student.first_name}}</h6>
+                           <p class="text-muted mb-0">{{student.student_class}}</p>
                         </div>
                      </div>
                      <a class="dropdown-item" href="profile.html">My Profile</a>
@@ -146,10 +146,10 @@
                      <li class="submenu">
                         <a href="#"><i class="fas fa-user-graduate"></i> <span> Students</span> <span class="menu-arrow"></span></a>
                         <ul>
-                           <li><a href="students.html">Student List</a></li>
-                           <li><a href="student-details.html">Student View</a></li>
-                           <li><a href="add-student.html">Student Add</a></li>
-                           <li><a href="edit-student.html">Student Edit</a></li>
+                           <li><a href="{% url 'student_list' %}">Student List</a></li>
+                           <a href="">Student </a>
+                           <li><a href="{% url 'add_student' %}">Student Add</a></li>
+                           <li><a href="">Student Edit</a></li>
                         </ul>
                      </li>
                      <li class="submenu">
